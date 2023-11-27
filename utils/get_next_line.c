@@ -6,45 +6,45 @@
 /*   By: lannur-s <lannur-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 13:58:08 by lannur-s          #+#    #+#             */
-/*   Updated: 2023/11/25 14:04:10 by lannur-s         ###   ########.fr       */
+/*   Updated: 2023/11/27 15:33:46 by lannur-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-char	*recurs(int depth, int *ret, int fd)
+char	*read_line_recursive(int depth, int *status, int fd)
 {
 	char	buff[1];
-	char	*lines;
-	int		files;
+	char	*line;
+	int		bytes_read;
 
-	files = read(fd, buff, 1);
-	if (files == 0)
+	bytes_read = read(fd, buff, 1);
+	if (bytes_read == 0)
 		buff[0] = 0;
 	if (buff[0] == '\n' || buff[0] == 0)
 	{
-		lines = malloc(sizeof(char) * depth + 1);
-		if (!lines)
+		line = malloc(sizeof(char) * depth + 1);
+		if (!line)
 			return (0);
-		lines[depth] = 0;
-		*ret = 1;
+		line[depth] = 0;
+		*status = 1;
 		if (buff[0] == 0)
-			*ret = 0;
-		return (lines);
+			*status = 0;
+		return (line);
 	}
 	else
 	{
-		lines = recurs(depth + 1, ret, fd);
-		lines[depth] = buff[0];
+		line = read_line_recursive(depth + 1, status, fd);
+		line[depth] = buff[0];
 	}
-	return (lines);
+	return (line);
 }
 
-int	get_next_line(int fd, char **lines)
+int	get_next_line(int fd, char **line)
 {
-	int	ret;
+	int	status;
 
-	ret = 1;
-	*lines = recurs(0, &ret, fd);
-	return (ret);
+	status = 1;
+	*line = read_line_recursive(0, &status, fd);
+	return (status);
 }

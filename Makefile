@@ -6,7 +6,7 @@
 #    By: lannur-s <lannur-s@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/15 13:43:15 by lannur-s          #+#    #+#              #
-#    Updated: 2023/11/25 13:13:36 by lannur-s         ###   ########.fr        #
+#    Updated: 2023/11/27 09:49:54 by lannur-s         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,6 @@ LIBFT_DIR = ./include/libft_combined
 INCLUDES = -I./include -I$(LIBFT_DIR)/include -I./minilibx-linux
 
 SRCS			=	so_long.c	\
-					get_next_line.c \
 					display/display.c	\
 					display/draw.c	\
 					display/keyboard.c	\
@@ -37,8 +36,9 @@ SRCS			=	so_long.c	\
 					parsing/checkmap.c	\
 					parsing/parsing.c	\
 					parsing/stockmap.c	\
-					utils/freeandexit.c
-	
+					utils/freeandexit.c \
+					utils/get_next_line.c
+					
 OBJS = $(SRCS:%.c=%.o)
 
 $(NAME): $(OBJS) $(LIBFT_DIR)/$(LIBFTNAME)

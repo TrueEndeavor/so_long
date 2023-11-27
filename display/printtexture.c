@@ -6,7 +6,7 @@
 /*   By: lannur-s <lannur-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 13:58:08 by lannur-s          #+#    #+#             */
-/*   Updated: 2023/11/25 14:03:47 by lannur-s         ###   ########.fr       */
+/*   Updated: 2023/11/27 17:19:26 by lannur-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 int	loadtexture(t_long *sl)
 {
-	sl->text[0] = mlx_xpm_file_to_image(sl->mlx_ptr, "./textures/bottom-64.xpm",
+	sl->text[0] = mlx_xpm_file_to_image(sl->mlx_ptr, "./textures/floor.xpm",
 			&sl->widthtext[0], &sl->heighttext[0]);
 	sl->ptr_text[0] = mlx_get_data_addr(sl->text[0],
 			&(sl->bpp_text[0]), &(sl->sline_text[0]), &(sl->ed_text[0]));
-	sl->text[1] = mlx_xpm_file_to_image(sl->mlx_ptr, "./textures/dalle-64t.xpm",
+	sl->text[1] = mlx_xpm_file_to_image(sl->mlx_ptr, "./textures/wall.xpm",
 			&sl->widthtext[1], &sl->heighttext[1]);
 	sl->ptr_text[1] = mlx_get_data_addr(sl->text[1],
 			&(sl->bpp_text[1]), &(sl->sline_text[1]), &(sl->ed_text[1]));
@@ -26,7 +26,7 @@ int	loadtexture(t_long *sl)
 			&sl->widthtext[3], &sl->heighttext[3]);
 	sl->ptr_text[3] = mlx_get_data_addr(sl->text[3],
 			&(sl->bpp_text[3]), &(sl->sline_text[3]), &(sl->ed_text[3]));
-	sl->text[2] = mlx_xpm_file_to_image(sl->mlx_ptr, "./textures/invader.xpm",
+	sl->text[2] = mlx_xpm_file_to_image(sl->mlx_ptr, "./textures/collectible.xpm",
 			&sl->widthtext[2], &sl->heighttext[2]);
 	sl->ptr_text[2] = mlx_get_data_addr(sl->text[2],
 			&(sl->bpp_text[2]), &(sl->sline_text[2]), &(sl->ed_text[2]));

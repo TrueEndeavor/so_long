@@ -6,7 +6,7 @@
 /*   By: lannur-s <lannur-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 14:03:00 by lannur-s          #+#    #+#             */
-/*   Updated: 2023/11/25 14:03:03 by lannur-s         ###   ########.fr       */
+/*   Updated: 2023/11/27 17:18:51 by lannur-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,6 @@ int	createwindow(t_long *sl)
 			&(sl->bpp), &(sl->s_line),
 			&(sl->ed));
 	sl->mlx_win = mlx_new_window(sl->mlx_ptr, sl->xscreen,
-			sl->yscreen, "42 so_long JCluzet");
+			sl->yscreen, "42 so_long lannur-s");
 	return (0);
 }
