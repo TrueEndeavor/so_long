@@ -1,25 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
+/*   check_ber.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lannur-s <lannur-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/25 13:58:08 by lannur-s          #+#    #+#             */
-/*   Updated: 2023/11/28 12:37:30 by lannur-s         ###   ########.fr       */
+/*   Created: 2023/11/28 12:00:50 by lannur-s          #+#    #+#             */
+/*   Updated: 2023/11/28 12:45:00 by lannur-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	parsing(t_long *sl, char *argv)
+int	check_ber_extension(char *file_name)
 {
-	//checkcubextension(argv, sl);
-	get_x_and_y(sl, argv);
-	mallocmap(sl);
-	stockmap(sl, argv);
-	checkmap(sl);
-	return (0);
+	int	len;
+
+	len = ft_strlen(file_name);
+	if (file_name[len - 4] == '.'
+		&& file_name[len - 3] == 'b'
+		&& file_name[len - 2] == 'e'
+		&& file_name[len - 1] == 'r')
+	{
+		if (access(file_name, R_OK) == -1)
+		{
+			display_error(strerror(errno));
+		}
+		return (0);
+	}
+	display_error("[ERROR] Files without .ber extension not accepted. "\
+	"Define your map description in a file ending with the .ber "\
+	"extension.");
+	return (1);
 }
 
 int	get_x_and_y(t_long *sl, char *filename)
@@ -48,47 +60,5 @@ int	get_x_and_y(t_long *sl, char *filename)
 	free(line);
 	sl->xscreen = sl->x * 64;
 	close(fd);
-	return (0);
-}
-
-char	replacechar(char c)
-{
-	if (c == '0')
-		return ('a');
-	if (c == '1')
-		return ('1');
-	if (c == 'P')
-		return ('c');
-	if (c == 'E')
-		return ('d');
-	if (c == 'C')
-		return ('e');
-	return (0);
-}
-
-int	initvar(t_long *sl)
-{
-	sl->keyboard[BACK] = 0;
-	sl->keyboard[RED_BUTTON] = 0;
-	sl->keyboard[ESC] = 0;
-	sl->keyboard[LEFT] = 0;
-	sl->keyboard[RIGHT] = 0;
-	sl->keyboard[ADVANCE] = 0;
-	sl->bpp = 0;
-	sl->casein = 0;
-	sl->casetotal = 0;
-	sl->y = 0;
-	sl->x = 0;
-	sl->collectible = 0;
-	sl->collectibletotal = 0;
-	sl->s_line = 0;
-	sl->maptofree = -1;
-	sl->move = 0;
-	sl->playerset = 0;
-	sl->collectibleset = 0;
-	sl->exitset = 0;
-	sl->lastplayer_x = -1;
-	sl->lastplayer_y = -1;
-	sl->mlx_ptr = NULL;
 	return (0);
 }

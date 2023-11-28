@@ -1,36 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.c                                          :+:      :+:    :+:   */
+/*   check_rectangle.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lannur-s <lannur-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/25 12:36:05 by lannur-s          #+#    #+#             */
-/*   Updated: 2023/11/28 12:40:59 by lannur-s         ###   ########.fr       */
+/*   Created: 2023/11/28 12:44:27 by lannur-s          #+#    #+#             */
+/*   Updated: 2023/11/28 12:54:28 by lannur-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	main(int ac, char **av)
+int	check_rectangle(char *file_name)
 {
-	//t_long	solong;
+	int		fd;
+	char	**line;
 
-	if (ac == 1)
-	{
-		display_error("[ERROR] Oh oh! The game map is missing."\
-		"You can pass a map like this: ./so_long maps/sample.ber");
-		exit (0);
-	}
-	if (ac > 2)
-	{
-		display_error("[ERROR] Too many arguments");
-		exit (0);
-	}
-	if (!check_ber_extension(av[1]))
-		exit (0);
-/* 	initvar(&solong);
-	parsing(&solong, av[1]);
-	display(&solong); */
-	return (0);
+    fd = open(file_name, O_RDONLY);
+    while (get_next_line(fd, char **line) != -1)
+    {
+    
+    }
 }
+
+

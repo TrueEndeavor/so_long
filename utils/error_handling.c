@@ -1,36 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.c                                          :+:      :+:    :+:   */
+/*   error_handling.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lannur-s <lannur-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/25 12:36:05 by lannur-s          #+#    #+#             */
-/*   Updated: 2023/11/28 12:40:59 by lannur-s         ###   ########.fr       */
+/*   Created: 2023/11/28 09:33:13 by lannur-s          #+#    #+#             */
+/*   Updated: 2023/11/28 11:37:53 by lannur-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+#include <stdio.h>
 
-int	main(int ac, char **av)
+int	showerror(t_long *sl, char *str)
 {
-	//t_long	solong;
+	write(1, "Error:", 6);
+	ft_putstr_fd(str, 1);
+	write(1, "\n", 1);
+	freeandexit(sl);
+	return (0);
+}
 
-	if (ac == 1)
-	{
-		display_error("[ERROR] Oh oh! The game map is missing."\
-		"You can pass a map like this: ./so_long maps/sample.ber");
-		exit (0);
-	}
-	if (ac > 2)
-	{
-		display_error("[ERROR] Too many arguments");
-		exit (0);
-	}
-	if (!check_ber_extension(av[1]))
-		exit (0);
-/* 	initvar(&solong);
-	parsing(&solong, av[1]);
-	display(&solong); */
+int	display_error(char *str)
+{
+	write(1, "Error:", 6);
+	ft_putstr_fd(str, 1);
+	write(1, "\n", 1);
 	return (0);
 }

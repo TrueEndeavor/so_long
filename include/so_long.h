@@ -6,7 +6,7 @@
 /*   By: lannur-s <lannur-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 12:00:14 by lannur-s          #+#    #+#             */
-/*   Updated: 2023/11/25 13:18:11 by lannur-s         ###   ########.fr       */
+/*   Updated: 2023/11/28 12:25:49 by lannur-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,34 +23,14 @@
 /* malloc(), free(), exit() */
 # include <stdlib.h>
 
+/* errno */
+# include <errno.h>
+
 /* Libft functions */
 # include "libft.h"
 
 # include "mlx.h"
 /* *****************************   STRUCTURES   *******************************/
-
-
-/* *****************************   CONSTANTS   ********************************/
-
-
-# if defined(__APPLE__) && defined(__MACH__)
-#  define ADVANCE 13
-#  define BACK 1
-#  define RIGHT 2
-#  define LEFT 0
-#  define ESC 53
-#  define RED_BUTTON 79
-#  define CLOSERED 17
-# else
-#  define ADVANCE 119
-#  define BACK 115
-#  define RIGHT 100
-#  define LEFT 97
-#  define ESC 65307
-#  define RED_BUTTON 79
-#  define CLOSERED 33
-# endif
-
 typedef struct s_long
 {
 	char			**map;
@@ -95,8 +75,33 @@ typedef struct s_long
 	unsigned int	color;
 }					t_long;
 
-char	*recurs(int depth, int *ret, int fd);
+
+/* *****************************   CONSTANTS   ********************************/
+
+
+# if defined(__APPLE__) && defined(__MACH__)
+#  define ADVANCE 13
+#  define BACK 1
+#  define RIGHT 2
+#  define LEFT 0
+#  define ESC 53
+#  define RED_BUTTON 79
+#  define CLOSERED 17
+# else
+#  define ADVANCE 119
+#  define BACK 115
+#  define RIGHT 100
+#  define LEFT 97
+#  define ESC 65307
+#  define RED_BUTTON 79
+#  define CLOSERED 33
+# endif
+
+
 int		get_next_line(int fd, char **out);
+int		showerror(t_long *sl, char *str);
+int		display_error(char *str);
+int		check_ber_extension(char *file_name);
 
 int		get_x_and_y(t_long *sl, char *argv);
 int		visible(t_long *sl);
@@ -111,8 +116,6 @@ int		checkmap(t_long *sl);
 int		numberblank(char *str);
 int		get_next_line(int fd, char **line);
 int		printtexture(t_long *sl, int starter_X, int starter_Y);
-int		showerror(t_long *sl, char *str);
-int		checkcubextension(char *str, t_long *sl);
 int		pos_player(t_long *sl);
 int		initplayer(t_long *sl);
 int		loadtexture(t_long *sl);

@@ -6,7 +6,7 @@
 /*   By: lannur-s <lannur-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 14:03:00 by lannur-s          #+#    #+#             */
-/*   Updated: 2023/11/27 17:18:51 by lannur-s         ###   ########.fr       */
+/*   Updated: 2023/11/28 09:42:57 by lannur-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	display(t_long *sl)
 	createwindow(sl);
 	loadtexture(sl);
 	render(sl);
-	write(1, "\033[32m[ so_long launch successfully ]\033[00m\n", 43);
+	write(1, "[ so_long launch successfully ]\n", 43);
 	write(1, "MOVE : ", 8);
 	ft_putnbr_fd(sl->move, 1);
 	pos_player(sl);
