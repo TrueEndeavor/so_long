@@ -6,7 +6,7 @@
 #    By: lannur-s <lannur-s@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/15 13:43:15 by lannur-s          #+#    #+#              #
-#    Updated: 2023/11/28 12:24:50 by lannur-s         ###   ########.fr        #
+#    Updated: 2023/11/29 19:08:00 by lannur-s         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,8 +27,11 @@ LIBFT_DIR = ./include/libft_combined
 
 INCLUDES = -I./include -I$(LIBFT_DIR)/include -I./minilibx-linux
 
-SRCS			=	so_long.c	\
-					parsing/check_ber.c	\
+SRCS			=	01src/so_long.c	\
+					02mapvalidation/check_ber.c	\
+					02mapvalidation/validate_map_structure.c \
+					02mapvalidation/check_structure.c \
+					03structureinitialization/init_struct.c \
 					display/display.c	\
 					display/draw.c	\
 					display/keyboard.c	\

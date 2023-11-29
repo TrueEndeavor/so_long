@@ -6,7 +6,7 @@
 /*   By: lannur-s <lannur-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 13:58:08 by lannur-s          #+#    #+#             */
-/*   Updated: 2023/11/28 12:00:12 by lannur-s         ###   ########.fr       */
+/*   Updated: 2023/11/29 15:46:18 by lannur-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,15 +27,16 @@ char	*read_line_recursive(int depth, int *status, int fd)
 		if (!line)
 			return (0);
 		line[depth] = 0;
-		*status = 1;
+		*status = 0;
 		if (buffer[0] == 0)
-			*status = 0;
+			*status = 1;
 		return (line);
 	}
 	else
 	{
 		line = read_line_recursive(depth + 1, status, fd);
-		line[depth] = buffer[0];
+		if (line)
+			line[depth] = buffer[0];
 	}
 	return (line);
 }
@@ -44,7 +45,7 @@ int	get_next_line(int fd, char **line)
 {
 	int	status;
 
-	status = 1;
+	status = 0;
 	*line = read_line_recursive(0, &status, fd);
 	return (status);
 }

@@ -6,7 +6,7 @@
 /*   By: lannur-s <lannur-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 12:00:14 by lannur-s          #+#    #+#             */
-/*   Updated: 2023/11/28 12:25:49 by lannur-s         ###   ########.fr       */
+/*   Updated: 2023/11/29 19:08:37 by lannur-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@
 # include "libft.h"
 
 # include "mlx.h"
+#include <stdio.h>
+
 /* *****************************   STRUCTURES   *******************************/
 typedef struct s_long
 {
@@ -73,7 +75,7 @@ typedef struct s_long
 	int				heighttext[10];
 	int				actualtext;
 	unsigned int	color;
-}					t_long;
+}	t_long;
 
 
 /* *****************************   CONSTANTS   ********************************/
@@ -102,6 +104,13 @@ int		get_next_line(int fd, char **out);
 int		showerror(t_long *sl, char *str);
 int		display_error(char *str);
 int		check_ber_extension(char *file_name);
+int		validate_map_structure(char *file_name);
+int		init_struct(t_long *sl);
+int		check_surrounded(char *line);
+int		check_sidewalls(char *line);
+int		check_valid_character(char *line);
+int		count_char(char *line, char c);
+int		check_line_validity(char *line, int *p_count, int *e_count, int *c_count);
 
 int		get_x_and_y(t_long *sl, char *argv);
 int		visible(t_long *sl);
@@ -142,7 +151,6 @@ int		go_hooking(t_long *sl);
 int		createwindow(t_long *sl);
 int		key_loop(t_long *sl);
 int		put_pxl(t_long *sl, int x, int y, unsigned int c);
-int		initvar(t_long *sl);
 
 #endif
 

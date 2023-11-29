@@ -6,7 +6,7 @@
 /*   By: lannur-s <lannur-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 13:58:08 by lannur-s          #+#    #+#             */
-/*   Updated: 2023/11/25 14:03:58 by lannur-s         ###   ########.fr       */
+/*   Updated: 2023/11/29 19:10:53 by lannur-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,20 +77,6 @@ int	checkmap(t_long *sl)
 	return (0);
 }
 
-int	mallocmap(t_long *sl)
-{
-	int	i;
-
-	i = 0;
-	sl->map = malloc(sizeof(char *) * sl->y);
-	while (i < sl->y)
-	{
-		sl->map[i] = malloc(sizeof(char) * (sl->x + 1));
-		i++;
-	}
-	sl->maptofree = 1;
-	return (1);
-}
 
 int	checkifgood(char c)
 {

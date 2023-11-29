@@ -6,7 +6,7 @@
 /*   By: lannur-s <lannur-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 09:33:13 by lannur-s          #+#    #+#             */
-/*   Updated: 2023/11/28 11:37:53 by lannur-s         ###   ########.fr       */
+/*   Updated: 2023/11/29 16:01:31 by lannur-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 int	showerror(t_long *sl, char *str)
 {
-	write(1, "Error:", 6);
+	write(1, "Error: ", 7);
 	ft_putstr_fd(str, 1);
 	write(1, "\n", 1);
 	freeandexit(sl);
@@ -24,7 +24,7 @@ int	showerror(t_long *sl, char *str)
 
 int	display_error(char *str)
 {
-	write(1, "Error:", 6);
+	write(1, "Error: ", 7);
 	ft_putstr_fd(str, 1);
 	write(1, "\n", 1);
 	return (0);

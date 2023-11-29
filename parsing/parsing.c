@@ -6,7 +6,7 @@
 /*   By: lannur-s <lannur-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 13:58:08 by lannur-s          #+#    #+#             */
-/*   Updated: 2023/11/28 12:37:30 by lannur-s         ###   ########.fr       */
+/*   Updated: 2023/11/29 19:11:40 by lannur-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,16 @@
 
 int	parsing(t_long *sl, char *argv)
 {
-	//checkcubextension(argv, sl);
-	get_x_and_y(sl, argv);
 	mallocmap(sl);
 	stockmap(sl, argv);
 	checkmap(sl);
 	return (0);
 }
-
+/* 
 int	get_x_and_y(t_long *sl, char *filename)
 {
 	char	*line;
-	int		fd;    
+	int		fd;
 	int		ret;
 
 	fd = open(filename, O_RDONLY);
@@ -49,7 +47,7 @@ int	get_x_and_y(t_long *sl, char *filename)
 	sl->xscreen = sl->x * 64;
 	close(fd);
 	return (0);
-}
+} */
 
 char	replacechar(char c)
 {
@@ -66,29 +64,4 @@ char	replacechar(char c)
 	return (0);
 }
 
-int	initvar(t_long *sl)
-{
-	sl->keyboard[BACK] = 0;
-	sl->keyboard[RED_BUTTON] = 0;
-	sl->keyboard[ESC] = 0;
-	sl->keyboard[LEFT] = 0;
-	sl->keyboard[RIGHT] = 0;
-	sl->keyboard[ADVANCE] = 0;
-	sl->bpp = 0;
-	sl->casein = 0;
-	sl->casetotal = 0;
-	sl->y = 0;
-	sl->x = 0;
-	sl->collectible = 0;
-	sl->collectibletotal = 0;
-	sl->s_line = 0;
-	sl->maptofree = -1;
-	sl->move = 0;
-	sl->playerset = 0;
-	sl->collectibleset = 0;
-	sl->exitset = 0;
-	sl->lastplayer_x = -1;
-	sl->lastplayer_y = -1;
-	sl->mlx_ptr = NULL;
-	return (0);
-}
+

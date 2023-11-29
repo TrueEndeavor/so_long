@@ -6,32 +6,11 @@
 /*   By: lannur-s <lannur-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 13:58:08 by lannur-s          #+#    #+#             */
-/*   Updated: 2023/11/28 12:36:01 by lannur-s         ###   ########.fr       */
+/*   Updated: 2023/11/29 15:13:30 by lannur-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-
-int	checkcubextension(char *str, t_long *sl)
-{
-	int	i;
-
-	i = 0;
-	while (str[i] != '\0')
-		i++;
-	if (str[i - 1] == 'r' && str[i - 2] == 'e'
-		&& str[i - 3] == 'b' && str[i - 4] == '.')
-	{
-		i = open(str, O_RDONLY);
-		if (i == -1)
-			showerror(sl, "File Name is not correct");
-		else
-			close(i);
-		return (0);
-	}
-	showerror(sl, "Files without .ber extension is not accepted");
-	return (0);
-}
 
 int	floodandfill(t_long *sl, int mapy, int mapx)
 {
