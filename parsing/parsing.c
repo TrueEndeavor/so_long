@@ -6,21 +6,21 @@
 /*   By: lannur-s <lannur-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 13:58:08 by lannur-s          #+#    #+#             */
-/*   Updated: 2023/11/29 19:11:40 by lannur-s         ###   ########.fr       */
+/*   Updated: 2023/11/30 13:37:30 by lannur-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	parsing(t_long *sl, char *argv)
+int	parsing(t_game_data *game_data,char *argv)
 {
-	mallocmap(sl);
-	stockmap(sl, argv);
-	checkmap(sl);
+	mallocmap(game_data);
+	stockmap(game_data,argv);
+	checkmap(game_data);
 	return (0);
 }
 /* 
-int	get_x_and_y(t_long *sl, char *filename)
+int	get_x_and_y(t_game_data *game_data,char *filename)
 {
 	char	*line;
 	int		fd;
@@ -28,23 +28,23 @@ int	get_x_and_y(t_long *sl, char *filename)
 
 	fd = open(filename, O_RDONLY);
 	ret = get_next_line(fd, &line);
-	sl->oldx = ft_strlen(line);
+	game_data->oldx = ft_strlen(line);
 	while (line[numberblank(line)] == '1' || line[numberblank(line)] == '0')
 	{
-		sl->x = ft_strlen(line);
-		if (sl->x != sl->oldx)
-			showerror(sl, "Map is not rectangular");
-		sl->oldx = sl->x;
+		game_data->x = ft_strlen(line);
+		if (game_data->x != game_data->oldx)
+			showerror(game_data,"Map is not rectangular");
+		game_data->oldx = game_data->x;
 		if (ret != -1)
 			free(line);
 		ret = get_next_line(fd, &line);
-		sl->y++;
+		game_data->y++;
 	}
-	if (sl->y == 0 || sl->x == 0)
-		showerror(sl, "Map is not correct or not well formated");
-	sl->yscreen = sl->y * 64;
+	if (game_data->y == 0 || game_data->x == 0)
+		showerror(game_data,"Map is not correct or not well formated");
+	game_data->yscreen = game_data->y * 64;
 	free(line);
-	sl->xscreen = sl->x * 64;
+	game_data->xscreen = game_data->x * 64;
 	close(fd);
 	return (0);
 } */

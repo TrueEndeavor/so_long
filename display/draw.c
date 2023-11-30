@@ -6,29 +6,29 @@
 /*   By: lannur-s <lannur-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 13:58:08 by lannur-s          #+#    #+#             */
-/*   Updated: 2023/11/25 14:03:07 by lannur-s         ###   ########.fr       */
+/*   Updated: 2023/11/30 13:37:49 by lannur-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	put_pxl(t_long *sl, int x, int y, unsigned int c)
+int	put_pxl(t_game_data *game_data,int x, int y, unsigned int c)
 {
 	char		*dest;
 
-	if (y >= sl->yscreen || x >= sl->xscreen || x < 0 \
+	if (y >= game_data->yscreen || x >= game_data->xscreen || x < 0 \
 	|| y < 0)
 		return (0);
-	dest = sl->pxl + sl->s_line * y + x * (sl->bpp / 8);
+	dest = game_data->pxl + game_data->s_line * y + x * (game_data->bpp / 8);
 	*(unsigned int *)dest = c;
 	return (0);
 }
 
-int	visible(t_long *sl)
+int	visible(t_game_data *game_data)
 {
-	render(sl);
-	pos_player(sl);
-	mlx_put_image_to_window(sl->mlx_ptr,
-		sl->mlx_win, sl->img, 0, 0);
+	render(game_data);
+	pos_player(game_data);
+	mlx_put_image_to_window(game_data->mlx_ptr,
+		game_data->mlx_win, game_data->img, 0, 0);
 	return (0);
 }

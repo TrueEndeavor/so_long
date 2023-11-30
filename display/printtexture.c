@@ -6,54 +6,54 @@
 /*   By: lannur-s <lannur-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 13:58:08 by lannur-s          #+#    #+#             */
-/*   Updated: 2023/11/27 17:19:26 by lannur-s         ###   ########.fr       */
+/*   Updated: 2023/11/30 13:37:49 by lannur-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	loadtexture(t_long *sl)
+int	loadtexture(t_game_data *game_data)
 {
-	sl->text[0] = mlx_xpm_file_to_image(sl->mlx_ptr, "./textures/floor.xpm",
-			&sl->widthtext[0], &sl->heighttext[0]);
-	sl->ptr_text[0] = mlx_get_data_addr(sl->text[0],
-			&(sl->bpp_text[0]), &(sl->sline_text[0]), &(sl->ed_text[0]));
-	sl->text[1] = mlx_xpm_file_to_image(sl->mlx_ptr, "./textures/wall.xpm",
-			&sl->widthtext[1], &sl->heighttext[1]);
-	sl->ptr_text[1] = mlx_get_data_addr(sl->text[1],
-			&(sl->bpp_text[1]), &(sl->sline_text[1]), &(sl->ed_text[1]));
-	sl->text[3] = mlx_xpm_file_to_image(sl->mlx_ptr, "./textures/player.xpm",
-			&sl->widthtext[3], &sl->heighttext[3]);
-	sl->ptr_text[3] = mlx_get_data_addr(sl->text[3],
-			&(sl->bpp_text[3]), &(sl->sline_text[3]), &(sl->ed_text[3]));
-	sl->text[2] = mlx_xpm_file_to_image(sl->mlx_ptr, "./textures/collectible.xpm",
-			&sl->widthtext[2], &sl->heighttext[2]);
-	sl->ptr_text[2] = mlx_get_data_addr(sl->text[2],
-			&(sl->bpp_text[2]), &(sl->sline_text[2]), &(sl->ed_text[2]));
-	sl->text[4] = mlx_xpm_file_to_image(sl->mlx_ptr, "./textures/exit.xpm",
-			&sl->widthtext[4], &sl->heighttext[4]);
-	sl->ptr_text[4] = mlx_get_data_addr(sl->text[4],
-			&(sl->bpp_text[4]), &(sl->sline_text[4]), &(sl->ed_text[4]));
+	game_data->text[0] = mlx_xpm_file_to_image(game_data->mlx_ptr, "./textures/floor.xpm",
+			&game_data->widthtext[0], &game_data->heighttext[0]);
+	game_data->ptr_text[0] = mlx_get_data_addr(game_data->text[0],
+			&(game_data->bpp_text[0]), &(game_data->sline_text[0]), &(game_data->ed_text[0]));
+	game_data->text[1] = mlx_xpm_file_to_image(game_data->mlx_ptr, "./textures/wall.xpm",
+			&game_data->widthtext[1], &game_data->heighttext[1]);
+	game_data->ptr_text[1] = mlx_get_data_addr(game_data->text[1],
+			&(game_data->bpp_text[1]), &(game_data->sline_text[1]), &(game_data->ed_text[1]));
+	game_data->text[3] = mlx_xpm_file_to_image(game_data->mlx_ptr, "./textures/player.xpm",
+			&game_data->widthtext[3], &game_data->heighttext[3]);
+	game_data->ptr_text[3] = mlx_get_data_addr(game_data->text[3],
+			&(game_data->bpp_text[3]), &(game_data->sline_text[3]), &(game_data->ed_text[3]));
+	game_data->text[2] = mlx_xpm_file_to_image(game_data->mlx_ptr, "./textures/collectible.xpm",
+			&game_data->widthtext[2], &game_data->heighttext[2]);
+	game_data->ptr_text[2] = mlx_get_data_addr(game_data->text[2],
+			&(game_data->bpp_text[2]), &(game_data->sline_text[2]), &(game_data->ed_text[2]));
+	game_data->text[4] = mlx_xpm_file_to_image(game_data->mlx_ptr, "./textures/exit.xpm",
+			&game_data->widthtext[4], &game_data->heighttext[4]);
+	game_data->ptr_text[4] = mlx_get_data_addr(game_data->text[4],
+			&(game_data->bpp_text[4]), &(game_data->sline_text[4]), &(game_data->ed_text[4]));
 	return (0);
 }
 
-int	printtexture(t_long *sl, int starter_X, int starter_Y)
+int	printtexture(t_game_data *game_data,int starter_X, int starter_Y)
 {
 	int	x;
 	int	y;
 
 	x = 0;
 	y = 0;
-	while (y < sl->heighttext[sl->actualtext])
+	while (y < game_data->heighttext[game_data->actualtext])
 	{
-		while (x < sl->widthtext[sl->actualtext])
+		while (x < game_data->widthtext[game_data->actualtext])
 		{
-			sl->color = *(unsigned int *)(sl->ptr_text[sl->actualtext]
-					+ sl->sline_text[sl->actualtext] * y + x
-					* (sl->bpp_text[sl->actualtext] / 8));
-			if (sl->color != 0)
+			game_data->color = *(unsigned int *)(game_data->ptr_text[game_data->actualtext]
+					+ game_data->sline_text[game_data->actualtext] * y + x
+					* (game_data->bpp_text[game_data->actualtext] / 8));
+			if (game_data->color != 0)
 			{
-				put_pxl(sl, starter_X * 64 + x, starter_Y * 64 + y, sl->color);
+				put_pxl(game_data,starter_X * 64 + x, starter_Y * 64 + y, game_data->color);
 			}
 			x++;
 		}
@@ -63,17 +63,17 @@ int	printtexture(t_long *sl, int starter_X, int starter_Y)
 	return (0);
 }
 
-int	gettextnum(int X, int Y, t_long *sl)
+int	gettextnum(int X, int Y, t_game_data *game_data)
 {
-	if (sl->map[Y][X] == '0' || sl->map[Y][X] == 'a')
-		sl->actualtext = 0;
-	if (sl->map[Y][X] == '1')
-		sl->actualtext = 1;
-	if (sl->map[Y][X] == 'C')
-		sl->actualtext = 2;
-	if (sl->map[Y][X] == 'E')
-		sl->actualtext = 4;
-	if (sl->map[Y][X] == 'P')
-		sl->actualtext = 0;
+	if (game_data->map[Y][X] == '0' || game_data->map[Y][X] == 'a')
+		game_data->actualtext = 0;
+	if (game_data->map[Y][X] == '1')
+		game_data->actualtext = 1;
+	if (game_data->map[Y][X] == 'C')
+		game_data->actualtext = 2;
+	if (game_data->map[Y][X] == 'E')
+		game_data->actualtext = 4;
+	if (game_data->map[Y][X] == 'P')
+		game_data->actualtext = 0;
 	return (0);
 }

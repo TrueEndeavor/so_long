@@ -6,90 +6,90 @@
 /*   By: lannur-s <lannur-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 13:58:08 by lannur-s          #+#    #+#             */
-/*   Updated: 2023/11/25 14:03:17 by lannur-s         ###   ########.fr       */
+/*   Updated: 2023/11/30 13:37:49 by lannur-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	moveplayer(int nb, t_long *sl)
+int	moveplayer(int nb, t_game_data *game_data)
 {
 	if (nb == 1)
-		if (sl->map[sl->player_y - 1][sl->player_x] != '1')
-			displaymove(sl, nb);
+		if (game_data->map[game_data->player_y - 1][game_data->player_x] != '1')
+			displaymove(game_data,nb);
 	if (nb == -1)
-		if (sl->map[sl->player_y + 1][sl->player_x] != '1')
-			displaymove(sl, nb);
+		if (game_data->map[game_data->player_y + 1][game_data->player_x] != '1')
+			displaymove(game_data,nb);
 	if (nb == 2)
-		if (sl->map[sl->player_y][sl->player_x - 1] != '1')
-			displaymove(sl, nb);
+		if (game_data->map[game_data->player_y][game_data->player_x - 1] != '1')
+			displaymove(game_data,nb);
 	if (nb == 3)
-		if (sl->map[sl->player_y][sl->player_x + 1] != '1')
-			displaymove(sl, nb);
+		if (game_data->map[game_data->player_y][game_data->player_x + 1] != '1')
+			displaymove(game_data,nb);
 	return (0);
 }
 
-int	displaymove(t_long *sl, int nb)
+int	displaymove(t_game_data *game_data,int nb)
 {
 	write(1, "\b\b\b\b\b\b\b\b\b\b\b", 12);
 	if (nb == 1)
-		sl->player_y--;
+		game_data->player_y--;
 	if (nb == -1)
-		sl->player_y++;
+		game_data->player_y++;
 	if (nb == 2)
-		sl->player_x--;
+		game_data->player_x--;
 	if (nb == 3)
-		sl->player_x++;
-	sl->move++;
+		game_data->player_x++;
+	game_data->move++;
 	write(1, "MOVE : ", 8);
-	ft_putnbr_fd(sl->move, 1);
-	checkaremove(sl);
+	ft_putnbr_fd(game_data->move, 1);
+	checkaremove(game_data);
 	return (0);
 }
 
-int	checkaremove(t_long *sl)
+int	checkaremove(t_game_data *game_data)
 {
-	if (sl->map[sl->player_y][sl->player_x] == 'C')
+	if (game_data->map[game_data->player_y][game_data->player_x] == 'C')
 	{
-		sl->collectible++;
-		sl->map[sl->player_y][sl->player_x] = '0';
+		game_data->collectible++;
+		game_data->map[game_data->player_y][game_data->player_x] = '0';
 	}
-	if (sl->map[sl->player_y][sl->player_x] == 'E')
+	if (game_data->map[game_data->player_y][game_data->player_x] == 'E')
 	{
-		if (sl->collectible == sl->collectibletotal)
+		if (game_data->collectible == game_data->collectibletotal)
 		{
 			write(1, "\b\b\b\b\b\b\b\b\b\b", 11);
 			write(1, "Congratulation you finish with ", 31);
-			ft_putnbr_fd(sl->move, 1);
+			ft_putnbr_fd(game_data->move, 1);
 			write(1, " moves.\n", 9);
-			freeandexit(sl);
+			freeandexit(game_data);
 		}
 	}
 	return (0);
 }
 
-int	pos_player(t_long *sl)
+int	pos_player(t_game_data *game_data)
 {
-	if (sl->lastplayer_x != -1)
+	if (game_data->lastplayer_x != -1)
 	{
-		gettextnum(sl->lastplayer_x, sl->lastplayer_y, sl);
-		printtexture(sl, sl->lastplayer_x, sl->lastplayer_y);
+		gettextnum(game_data->lastplayer_x, game_data->lastplayer_y, game_data);
+		printtexture(game_data,game_data->lastplayer_x, game_data->lastplayer_y);
 	}
-	gettextnum(sl->player_x, sl->player_y, sl);
-	printtexture(sl, sl->player_x, sl->player_y);
-	sl->actualtext = 3;
-	printtexture(sl, sl->player_x, sl->player_y);
-	sl->lastplayer_x = sl->player_x;
-	sl->lastplayer_y = sl->player_y;
-	resetkeyboard(sl);
+	gettextnum(game_data->player_x, game_data->player_y, game_data);
+	printtexture(game_data,game_data->player_x, game_data->player_y);
+	game_data->actualtext = 3;
+	printtexture(game_data,game_data->player_x, game_data->player_y);
+	game_data->lastplayer_x = game_data->player_x;
+	game_data->lastplayer_y = game_data->player_y;
+	resetkeyboard(game_data);
 	return (0);
 }
 
-void	resetkeyboard(t_long *sl)
+void	resetkeyboard(t_game_data *game_data)
 {
-	sl->keyboard[ESC] = 0;
-	sl->keyboard[RIGHT] = 0;
-	sl->keyboard[LEFT] = 0;
-	sl->keyboard[BACK] = 0;
-	sl->keyboard[ADVANCE] = 0;
+	game_data->keyboard[ESC] = 0;
+	game_data->keyboard[RIGHT] = 0;
+	game_data->keyboard[LEFT] = 0;
+	game_data->keyboard[BACK] = 0;
+	game_data->keyboard[ADVANCE] = 0;
 }

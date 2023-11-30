@@ -1,31 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error_handling.c                                   :+:      :+:    :+:   */
+/*   check_args.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lannur-s <lannur-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/28 09:33:13 by lannur-s          #+#    #+#             */
-/*   Updated: 2023/11/30 13:37:30 by lannur-s         ###   ########.fr       */
+/*   Created: 2023/11/30 09:51:40 by lannur-s          #+#    #+#             */
+/*   Updated: 2023/11/30 09:54:25 by lannur-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-#include <stdio.h>
 
-int	showerror(t_game_data *game_data,char *str)
+int	check_args(int ac)
 {
-	write(1, "Error: ", 7);
-	ft_putstr_fd(str, 1);
-	write(1, "\n", 1);
-	freeandexit(game_data);
-	return (0);
-}
-
-int	display_error(char *str)
-{
-	write(1, "Error: ", 7);
-	ft_putstr_fd(str, 1);
-	write(1, "\n", 1);
+	if (ac == 1)
+	{
+		display_error("[ERROR] Oh oh! The game map is missing."\
+		"You can pass a map like this: ./so_long maps/sample.ber");
+		return (1);
+	}
+	if (ac > 2)
+	{
+		display_error("[ERROR] Too many arguments");
+		return (1);
+	}
 	return (0);
 }

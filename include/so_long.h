@@ -6,7 +6,7 @@
 /*   By: lannur-s <lannur-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 12:00:14 by lannur-s          #+#    #+#             */
-/*   Updated: 2023/11/29 19:08:37 by lannur-s         ###   ########.fr       */
+/*   Updated: 2023/11/30 13:38:10 by lannur-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,12 @@
 #include <stdio.h>
 
 /* *****************************   STRUCTURES   *******************************/
-typedef struct s_long
+typedef struct s_game_data
 {
 	char			**map;
 	int				xscreen;
 	int				yscreen;
+
 	int				x;
 	int				y;
 	int				oldx;
@@ -75,7 +76,7 @@ typedef struct s_long
 	int				heighttext[10];
 	int				actualtext;
 	unsigned int	color;
-}	t_long;
+}	t_game_data;
 
 
 /* *****************************   CONSTANTS   ********************************/
@@ -100,57 +101,62 @@ typedef struct s_long
 # endif
 
 
+int		check_args(int ac);
+
 int		get_next_line(int fd, char **out);
-int		showerror(t_long *sl, char *str);
+int		showerror(t_game_data *game_data,char *str);
 int		display_error(char *str);
 int		check_ber_extension(char *file_name);
-int		validate_map_structure(char *file_name);
-int		init_struct(t_long *sl);
+int	validate_map(char *file_name, size_t *length, size_t *height);
 int		check_surrounded(char *line);
 int		check_sidewalls(char *line);
 int		check_valid_character(char *line);
 int		count_char(char *line, char c);
 int		check_line_validity(char *line, int *p_count, int *e_count, int *c_count);
+int		init_struct(t_game_data *game_data);
+int	is_map_not_surrounded(char *line);
+int	is_map_not_rectangular(char *line, size_t prev_length);
+int	check_counts(int p_count, int e_count, int c_count);
 
-int		get_x_and_y(t_long *sl, char *argv);
-int		visible(t_long *sl);
+int		get_x_and_y(t_game_data *game_data,char *argv);
+int		visible(t_game_data *game_data);
 char	*ft_strcpy(char *dest, char *src);
-int		parsing(t_long *sl, char *argv);
-int		stockmap(t_long *sl, char *argv);
-int		mallocmap(t_long *sl);
-int		render_calcul(t_long *sl);
-int		render(t_long *sl);
-void	floodandfill2(t_long *sl, int mapy, int mapx);
-int		checkmap(t_long *sl);
+int		parsing(t_game_data *game_data,char *argv);
+int		stockmap(t_game_data *game_data,char *argv);
+int		mallocmap(t_game_data *game_data);
+int		render_calcul(t_game_data *game_data);
+int		render(t_game_data *game_data);
+void	floodandfill2(t_game_data *game_data,int mapy, int mapx);
+int		checkmap(t_game_data *game_data);
 int		numberblank(char *str);
 int		get_next_line(int fd, char **line);
-int		printtexture(t_long *sl, int starter_X, int starter_Y);
-int		pos_player(t_long *sl);
-int		initplayer(t_long *sl);
-int		loadtexture(t_long *sl);
-int		loadtexture3(t_long *sl);
-int		gettextnum(int X, int Y, t_long *sl);
-int		moveplayer(int nb, t_long *sl);
-int		checkaremove(t_long *sl);
-int		stockline(t_long *sl, char *line, int nb);
+int		printtexture(t_game_data *game_data,int starter_X, int starter_Y);
+int		pos_player(t_game_data *game_data);
+int		initplayer(t_game_data *game_data);
+int		loadtexture(t_game_data *game_data);
+int		loadtexture3(t_game_data *game_data);
+int		gettextnum(int X, int Y, t_game_data *game_data);
+int		moveplayer(int nb, t_game_data *game_data);
+int		checkaremove(t_game_data *game_data);
+int		stockline(t_game_data *game_data,char *line, int nb);
 int		checkifgood(char c);
 char	replacechar(char c);
-int		checkthewall(t_long *sl);
-int		floodandfill(t_long *sl, int mapy, int mapx);
-int		displaymove(t_long *sl, int nb);
-int		freemap(t_long *sl);
-void	resetkeyboard(t_long *sl);
-int		checkaround(int mapx, int mapy, t_long *sl);
-int		ft_key_hit(int keycode, t_long *sl);
-int		ft_key_release(int keycode, t_long *sl);
-int		ft_keyboard(t_long *display);
-int		closebyredbutton(t_long *sl);
-int		freeandexit(t_long *sl);
-int		display(t_long *sl);
-int		go_hooking(t_long *sl);
-int		createwindow(t_long *sl);
-int		key_loop(t_long *sl);
-int		put_pxl(t_long *sl, int x, int y, unsigned int c);
+int		checkthewall(t_game_data *game_data);
+int		floodandfill(t_game_data *game_data,int mapy, int mapx);
+int		displaymove(t_game_data *game_data,int nb);
+int		freemap(t_game_data *game_data);
+void	resetkeyboard(t_game_data *game_data);
+int		checkaround(int mapx, int mapy, t_game_data *game_data);
+int		ft_key_hit(int keycode, t_game_data *game_data);
+int		ft_key_release(int keycode, t_game_data *game_data);
+int		ft_keyboard(t_game_data *display);
+int		closebyredbutton(t_game_data *game_data);
+int		freeandexit(t_game_data *game_data);
+int		display(t_game_data *game_data);
+int		go_hooking(t_game_data *game_data);
+int		createwindow(t_game_data *game_data);
+int		key_loop(t_game_data *game_data);
+int		put_pxl(t_game_data *game_data,int x, int y, unsigned int c);
 
 #endif
 
