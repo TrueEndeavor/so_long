@@ -1,27 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_rectangle.c                                  :+:      :+:    :+:   */
+/*   check_ber.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lannur-s <lannur-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/28 12:44:27 by lannur-s          #+#    #+#             */
-/*   Updated: 2023/11/28 12:54:28 by lannur-s         ###   ########.fr       */
+/*   Created: 2023/11/28 12:00:50 by lannur-s          #+#    #+#             */
+/*   Updated: 2023/12/04 15:22:26 by lannur-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	check_rectangle(char *file_name)
+int	check_ber_extension(char *file_name)
 {
-	int		fd;
-	char	**line;
+	int		len;
 
-    fd = open(file_name, O_RDONLY);
-    while (get_next_line(fd, char **line) != -1)
-    {
-    
-    }
+	len = ft_strlen(file_name);
+	if (file_name[len - 4] != '.' || file_name[len - 3] != 'b'
+		|| file_name[len - 2] != 'e' || file_name[len - 1] != 'r')
+	{
+		display_error("[ERROR] Invalid file name. \
+		Files without .ber extension not accepted.");
+		return (0);
+	}
+	return (1);
 }
-
-

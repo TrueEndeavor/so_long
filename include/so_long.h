@@ -6,7 +6,7 @@
 /*   By: lannur-s <lannur-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 12:00:14 by lannur-s          #+#    #+#             */
-/*   Updated: 2023/11/30 13:38:10 by lannur-s         ###   ########.fr       */
+/*   Updated: 2023/12/04 15:10:56 by lannur-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,134 +29,93 @@
 /* Libft functions */
 # include "libft.h"
 
+# include <X11/X.h>
+# include <X11/keysym.h>
 # include "mlx.h"
+
 #include <stdio.h>
 
 /* *****************************   STRUCTURES   *******************************/
 typedef struct s_game_data
 {
-	char			**map;
-	int				xscreen;
-	int				yscreen;
-
-	int				x;
-	int				y;
-	int				oldx;
-	int				collectibleparse;
-	int				exitparse;
-	int				player_x;
-	int				player_y;
-	int				lastplayer_x;
-	int				lastplayer_y;
-	int				collectible;
-	int				collectibletotal;
-	int				move;
-	int				playerset;
-	int				exitset;
-	int				collectibleset;
-
-	char			*pxl;
-	int				bpp;
-	int				s_line;
-	double			casetotal;
-	double			casein;
-	int				ed;
-	void			*mlx_ptr;
-	void			*mlx_win;
-	void			*img;
-	int				keyboard[70000];
-	int				maptofree;
-
-	int				bpp_text[10];
-	int				sline_text[10];
-	int				ed_text[10];
-	char			*ptr_text[10];
-	void			*text[10];
-	int				widthtext[10];
-	int				heighttext[10];
-	int				actualtext;
-	unsigned int	color;
+	void	*mlx_ptr;
+	void	*win_ptr;
+	void	*background_ptr;
+	void	*mini_background_ptr;
+	void	*wall_ptr;
+	void	*bee_right_ptr;
+	void	*bee_left_ptr;
+	void	*bee_up_ptr;
+	void	*bee_down_ptr;
+	void	*flower_ptr;
+	void	*hive_ptr;
+	int		height;
+	int		width;
+	t_list	*map;
+	int		bee_x;
+	int		bee_y;
+	int		c_count;
+	int		collected;
+	int		e_count;
+	int		p_count;
+	int		moves;
+	char	**dup_map;
+	int		start_x;
+	int		start_y;
 }	t_game_data;
-
 
 /* *****************************   CONSTANTS   ********************************/
 
-
-# if defined(__APPLE__) && defined(__MACH__)
-#  define ADVANCE 13
-#  define BACK 1
-#  define RIGHT 2
-#  define LEFT 0
-#  define ESC 53
-#  define RED_BUTTON 79
-#  define CLOSERED 17
-# else
-#  define ADVANCE 119
-#  define BACK 115
-#  define RIGHT 100
-#  define LEFT 97
-#  define ESC 65307
-#  define RED_BUTTON 79
-#  define CLOSERED 33
-# endif
-
+# define PIXELS 64
+# define MAX_HEIGHT 15
+# define MAX_WIDTH 30
+# define MIN_HEIGHT 3
+# define MIN_WIDTH 3
 
 int		check_args(int ac);
 
-int		get_next_line(int fd, char **out);
-int		showerror(t_game_data *game_data,char *str);
+int		showerror(char *str);
 int		display_error(char *str);
+
 int		check_ber_extension(char *file_name);
-int	validate_map(char *file_name, size_t *length, size_t *height);
-int		check_surrounded(char *line);
-int		check_sidewalls(char *line);
-int		check_valid_character(char *line);
-int		count_char(char *line, char c);
-int		check_line_validity(char *line, int *p_count, int *e_count, int *c_count);
-int		init_struct(t_game_data *game_data);
-int	is_map_not_surrounded(char *line);
-int	is_map_not_rectangular(char *line, size_t prev_length);
-int	check_counts(int p_count, int e_count, int c_count);
+int	destroy(t_game_data *game_data);
+int	load_map(t_game_data *game_data, char *line);
+int	validate_map(t_game_data *game_data);
+int		check_rectangle(t_game_data *game_data);
+int		check_size(t_game_data *game_data);
+int		check_chars(t_game_data *game_data);
+int		check_walls(t_game_data *game_data);
+int		e_p_c_count(t_game_data *game_data);
+int	check_valid_path(t_game_data *game_data);
+int		set_dup_map(t_game_data *game_data);
+int		flood_fill(int x, int y, t_game_data *game_data);
+int		check_flood_fill(t_game_data *game_data);
+int	set_up(t_game_data *game_data);
+void	win_game(t_game_data *game_data, char move);
+void	win_left(t_game_data *game_data);
+void	win_right(t_game_data *game_data);
+void	win_up(t_game_data *game_data);
+void	win_down(t_game_data *game_data);
 
-int		get_x_and_y(t_game_data *game_data,char *argv);
-int		visible(t_game_data *game_data);
-char	*ft_strcpy(char *dest, char *src);
-int		parsing(t_game_data *game_data,char *argv);
-int		stockmap(t_game_data *game_data,char *argv);
-int		mallocmap(t_game_data *game_data);
-int		render_calcul(t_game_data *game_data);
-int		render(t_game_data *game_data);
-void	floodandfill2(t_game_data *game_data,int mapy, int mapx);
-int		checkmap(t_game_data *game_data);
-int		numberblank(char *str);
-int		get_next_line(int fd, char **line);
-int		printtexture(t_game_data *game_data,int starter_X, int starter_Y);
-int		pos_player(t_game_data *game_data);
-int		initplayer(t_game_data *game_data);
-int		loadtexture(t_game_data *game_data);
-int		loadtexture3(t_game_data *game_data);
-int		gettextnum(int X, int Y, t_game_data *game_data);
-int		moveplayer(int nb, t_game_data *game_data);
-int		checkaremove(t_game_data *game_data);
-int		stockline(t_game_data *game_data,char *line, int nb);
-int		checkifgood(char c);
-char	replacechar(char c);
-int		checkthewall(t_game_data *game_data);
-int		floodandfill(t_game_data *game_data,int mapy, int mapx);
-int		displaymove(t_game_data *game_data,int nb);
-int		freemap(t_game_data *game_data);
-void	resetkeyboard(t_game_data *game_data);
-int		checkaround(int mapx, int mapy, t_game_data *game_data);
-int		ft_key_hit(int keycode, t_game_data *game_data);
-int		ft_key_release(int keycode, t_game_data *game_data);
-int		ft_keyboard(t_game_data *display);
-int		closebyredbutton(t_game_data *game_data);
-int		freeandexit(t_game_data *game_data);
-int		display(t_game_data *game_data);
-int		go_hooking(t_game_data *game_data);
-int		createwindow(t_game_data *game_data);
-int		key_loop(t_game_data *game_data);
-int		put_pxl(t_game_data *game_data,int x, int y, unsigned int c);
-
+void read_and_initialize_map(t_game_data *game_data, char *file_name);
+int		on_keypress(int keysym, t_game_data *data);
+void	move_left(t_game_data *data);
+void	move_right(t_game_data *data);
+void	move_up(t_game_data *data);
+void	move_down(t_game_data *data);
+void	free_maps(t_game_data *game_data);
+void	destroy_images(t_game_data *game_data);
+int		check_arg(char *str);
+void	set_size_get_line(t_game_data *game_data, char *map);
+void	init_images(t_game_data *game_data);
+void	set_images(t_game_data *game_data);
+void	set_player(t_game_data *game_data);
+int		on_keypress(int keysym, t_game_data *game_data);
+void	move_left(t_game_data *game_data);
+void	move_right(t_game_data *game_data);
+void	move_up(t_game_data *game_data);
+void	move_down(t_game_data *game_data);
+char	check_next_move(t_game_data *game_data, int x, int y);
+void	check_collected(t_game_data *game_data, int x, int y);
 #endif
 

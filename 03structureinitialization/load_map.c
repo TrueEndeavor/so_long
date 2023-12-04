@@ -1,38 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_ber.c                                        :+:      :+:    :+:   */
+/*   load_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lannur-s <lannur-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/28 12:00:50 by lannur-s          #+#    #+#             */
-/*   Updated: 2023/11/29 19:10:02 by lannur-s         ###   ########.fr       */
+/*   Created: 2023/11/29 19:07:20 by lannur-s          #+#    #+#             */
+/*   Updated: 2023/12/04 12:49:22 by lannur-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	check_ber_extension(char *file_name)
+int	load_map(t_game_data *game_data, char *line)
 {
-	int	len;
+	t_list	*new;
+	t_list	*last;
 
-	len = ft_strlen(file_name);
-	if (file_name[len - 4] == '.'
-		&& file_name[len - 3] == 'b'
-		&& file_name[len - 2] == 'e'
-		&& file_name[len - 1] == 'r')
-	{
-		if (access(file_name, R_OK) == -1)
-		{
-			display_error(strerror(errno));
-		}
+	new = (t_list *)malloc(sizeof(t_list));
+	if (!new)
 		return (0);
-	}
-	else
+	new->content = ft_strdup(line);
+	if (!new->content)
+		return (0);
+	new->next = NULL;
+	if (!game_data->map)
 	{
-		display_error("[ERROR] Files without .ber extension not accepted. "\
-		"Define your map description in a file ending with the .ber "\
-		"extension.");
+		game_data->map = new;
+		return (1);
 	}
+	last = ft_lstlast(game_data->map);
+	last->next = new;
 	return (1);
 }

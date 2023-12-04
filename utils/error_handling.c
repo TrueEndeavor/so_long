@@ -6,19 +6,18 @@
 /*   By: lannur-s <lannur-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 09:33:13 by lannur-s          #+#    #+#             */
-/*   Updated: 2023/11/30 13:37:30 by lannur-s         ###   ########.fr       */
+/*   Updated: 2023/12/04 14:17:56 by lannur-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 #include <stdio.h>
 
-int	showerror(t_game_data *game_data,char *str)
+int	showerror(char *str)
 {
 	write(1, "Error: ", 7);
 	ft_putstr_fd(str, 1);
 	write(1, "\n", 1);
-	freeandexit(game_data);
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 #    By: lannur-s <lannur-s@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/15 13:43:15 by lannur-s          #+#    #+#              #
-#    Updated: 2023/11/30 12:03:17 by lannur-s         ###   ########.fr        #
+#    Updated: 2023/12/04 15:11:59 by lannur-s         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,27 +28,22 @@ LIBFT_DIR = ./include/libft_combined
 INCLUDES = -I./include -I$(LIBFT_DIR)/include -I./minilibx-linux
 
 SRCS			=	01src/so_long.c	\
-					02mapvalidation/check_args.c	\
-					02mapvalidation/check_ber.c	\
-					02mapvalidation/validate_map.c \
-					02mapvalidation/map_validation_utility_1.c \
-					02mapvalidation/map_validation_utility_2.c \
-					03structureinitialization/init_struct.c \
-					display/display.c	\
-					display/draw.c	\
-					display/keyboard.c	\
-					display/moveplayer.c	\
-					display/printtexture.c	\
-					parsing/checkmap.c	\
-					parsing/parsing.c	\
-					parsing/stockmap.c	\
+					02inputvalidation/check_args.c	\
+					02inputvalidation/check_ber.c	\
+					03structureinitialization/load_map.c \
+					03structureinitialization/moves.c \
+					03structureinitialization/read_and_initialize_map.c \
+					03structureinitialization/setup.c \
+					03structureinitialization/win.c \
+					04mapvalidation/validate_map.c \
+					04mapvalidation/path.c \
+					04mapvalidation/map_validation_utility_1.c \
 					utils/error_handling.c \
-					utils/freeandexit.c \
-					utils/gnl_recursive.c
+					06destroy/destroy.c
 					
 OBJS = $(SRCS:%.c=%.o)
 
-$(NAME): $(OBJS) $(LIBFT_DIR)/$(LIBFTNAME)
+$(NAME): $(LIBFT_DIR)/$(LIBFTNAME) $(OBJS)
 	$(CC) $(CCFLAGS) $(SRCS) $(LIBFT_DIR)/$(LIBFTNAME) $(INCLUDES) -o ${NAME} $(MLX_FLAGS)
 
 $(LIBFT_DIR)/$(LIBFTNAME):
@@ -57,7 +52,7 @@ $(LIBFT_DIR)/$(LIBFTNAME):
 %.o: %.c $(HEADERS)
 	$(CC) $(CCFLAGS) $(INCLUDES) -c $< -o $@ 
 
-all: $(MLX) $(NAME)
+all: $(NAME) $(MLX)
 
 clean:
 	rm -f $(OBJS)

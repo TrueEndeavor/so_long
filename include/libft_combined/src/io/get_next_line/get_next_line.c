@@ -6,7 +6,7 @@
 /*   By: lannur-s <lannur-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 15:33:11 by lannur-s          #+#    #+#             */
-/*   Updated: 2023/10/19 09:58:25 by lannur-s         ###   ########.fr       */
+/*   Updated: 2023/12/04 16:27:01 by lannur-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ char	*read_from_file(char *basin_buffer, int fd)
 		temp = ft_strjoin(basin_buffer, cup_buffer);
 		free(basin_buffer);
 		basin_buffer = temp;
-		if (ft_strchr(basin_buffer, '\n'))
+		if (ft_strchr(basin_buffer, '\n') || bytes_read == 0)
 			break ;
 	}
 	free (cup_buffer);
