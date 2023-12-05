@@ -6,7 +6,7 @@
 #    By: lannur-s <lannur-s@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/15 13:43:15 by lannur-s          #+#    #+#              #
-#    Updated: 2023/12/04 15:11:59 by lannur-s         ###   ########.fr        #
+#    Updated: 2023/12/05 15:04:09 by lannur-s         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ NAME = so_long
 LIBFTNAME = libft.a
 
 CC = cc
-CCFLAGS = -g -g3 -Wall -Werror -Wextra
+CCFLAGS = -g -Wall -Werror -Wextra
 
 AR = ar
 ARFLAGS = -rcs

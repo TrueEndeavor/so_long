@@ -6,7 +6,7 @@
 /*   By: lannur-s <lannur-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 13:49:07 by lannur-s          #+#    #+#             */
-/*   Updated: 2023/12/04 17:20:08 by lannur-s         ###   ########.fr       */
+/*   Updated: 2023/12/05 15:46:50 by lannur-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	check_readable(t_game_data *game_data, char *file_name)
 	fd = open(file_name, O_RDONLY);
 	if (fd <= 0 || read(fd, &line, 0) < 0)
 	{
-		display_error("[ERROR] Cannot read file");
+		display_error(strerror(errno));
 		destroy(game_data);
 	}
 	return (fd);

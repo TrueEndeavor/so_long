@@ -6,7 +6,7 @@
 /*   By: lannur-s <lannur-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 11:51:43 by lannur-s          #+#    #+#             */
-/*   Updated: 2023/12/04 15:19:04 by lannur-s         ###   ########.fr       */
+/*   Updated: 2023/12/05 16:17:21 by lannur-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,18 +50,18 @@ void	destroy_images(t_game_data *data)
 		mlx_destroy_image(data->mlx_ptr, data->mini_background_ptr);
 	if (data->wall_ptr)
 		mlx_destroy_image(data->mlx_ptr, data->wall_ptr);
-	if (data->bee_down_ptr)
-		mlx_destroy_image(data->mlx_ptr, data->bee_down_ptr);
-	if (data->bee_left_ptr)
-		mlx_destroy_image(data->mlx_ptr, data->bee_left_ptr);
-	if (data->bee_right_ptr)
-		mlx_destroy_image(data->mlx_ptr, data->bee_right_ptr);
-	if (data->bee_up_ptr)
-		mlx_destroy_image(data->mlx_ptr, data->bee_up_ptr);
+	if (data->player_down_ptr)
+		mlx_destroy_image(data->mlx_ptr, data->player_down_ptr);
+	if (data->player_left_ptr)
+		mlx_destroy_image(data->mlx_ptr, data->player_left_ptr);
+	if (data->player_right_ptr)
+		mlx_destroy_image(data->mlx_ptr, data->player_right_ptr);
+	if (data->player_up_ptr)
+		mlx_destroy_image(data->mlx_ptr, data->player_up_ptr);
 	if (data->flower_ptr)
 		mlx_destroy_image(data->mlx_ptr, data->flower_ptr);
-	if (data->hive_ptr)
-		mlx_destroy_image(data->mlx_ptr, data->hive_ptr);
+	if (data->lover_ptr)
+		mlx_destroy_image(data->mlx_ptr, data->lover_ptr);
 }
 
 int	destroy(t_game_data *data)

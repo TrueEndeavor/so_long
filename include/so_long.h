@@ -6,7 +6,7 @@
 /*   By: lannur-s <lannur-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 12:00:14 by lannur-s          #+#    #+#             */
-/*   Updated: 2023/12/04 15:10:56 by lannur-s         ###   ########.fr       */
+/*   Updated: 2023/12/05 16:09:23 by lannur-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,17 +43,17 @@ typedef struct s_game_data
 	void	*background_ptr;
 	void	*mini_background_ptr;
 	void	*wall_ptr;
-	void	*bee_right_ptr;
-	void	*bee_left_ptr;
-	void	*bee_up_ptr;
-	void	*bee_down_ptr;
+	void	*player_right_ptr;
+	void	*player_left_ptr;
+	void	*player_up_ptr;
+	void	*player_down_ptr;
 	void	*flower_ptr;
-	void	*hive_ptr;
+	void	*lover_ptr;
 	int		height;
 	int		width;
 	t_list	*map;
-	int		bee_x;
-	int		bee_y;
+	int		cat_x;
+	int		cat_y;
 	int		c_count;
 	int		collected;
 	int		e_count;
