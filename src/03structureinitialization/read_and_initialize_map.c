@@ -6,54 +6,58 @@
 /*   By: lannur-s <lannur-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 13:49:07 by lannur-s          #+#    #+#             */
-/*   Updated: 2023/12/05 15:46:50 by lannur-s         ###   ########.fr       */
+/*   Updated: 2023/12/06 18:44:24 by lannur-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	check_readable(t_game_data *game_data, char *file_name)
+int	check_readable(t_data *data, char *map)
 {
 	int		fd;
 	char	*line;
 
-	fd = open(file_name, O_RDONLY);
+	fd = open(map, O_RDONLY);
 	if (fd <= 0 || read(fd, &line, 0) < 0)
 	{
-		display_error(strerror(errno));
-		destroy(game_data);
+		display_error("Cannot read map");
+		on_destroy(data);
 	}
 	return (fd);
 }
 
-char *trim_newline(char *str){
-    int len = ft_strlen(str);
-    if (len > 0 && str[len - 1] == '\n') {
-        str[len - 1] = '\0';
-    }
-    return (str);
+char	*trim_newline(char *str)
+{
+	int		len;
+
+	len = ft_strlen(str);
+	if (len > 0 && str[len - 1] == '\n')
+	{
+		str[len - 1] = '\0';
+	}
+	return (str);
 }
 
-void	read_and_initialize_map(t_game_data *game_data, char *file_name)
+void	read_and_initialize_map(t_data *data, char *map)
 {
 	int		fd;
 	char	*line;
 
-	fd = check_readable(game_data, file_name);
+	fd = check_readable(data, map);
 	line = get_next_line(fd);
-	game_data->width = (int) ft_strlen(line) - 1;
+	data->width = (int) ft_strlen(line) - 1;
 	if (!line)
 	{
-		display_error("[ERROR] Cannot read map");
-		destroy(game_data);
+		display_error("Cannot read map");
+		on_destroy(data);
 	}
 	while (line)
 	{
 		if (!line)
-			destroy(game_data);
-		game_data->height++;
-		if (!load_map(game_data, trim_newline(line)))
-			destroy(game_data);
+			on_destroy(data);
+		data->height++;
+		if (!load_map(data, trim_newline(line)))
+			on_destroy(data);
 		free(line);
 		line = get_next_line(fd);
 	}

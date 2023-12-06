@@ -1,28 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_args.c                                       :+:      :+:    :+:   */
+/*   error_handling.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lannur-s <lannur-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/30 09:51:40 by lannur-s          #+#    #+#             */
-/*   Updated: 2023/12/04 11:49:36 by lannur-s         ###   ########.fr       */
+/*   Created: 2023/11/28 09:33:13 by lannur-s          #+#    #+#             */
+/*   Updated: 2023/12/06 18:57:00 by lannur-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	check_args(int ac)
+int	display_error(char *str)
 {
-	if (ac == 1)
-	{
-		display_error("[ERROR] So long needs a map");
-		return (0);
-	}
-	if (ac > 2)
-	{
-		display_error("[ERROR] Too many arguments");
-		return (0);
-	}
-	return (1);
+	write(1, "[ERROR] ", 8);
+	ft_putstr_fd(str, 1);
+	write(1, "\n", 1);
+	return (0);
 }

@@ -6,35 +6,35 @@
 /*   By: lannur-s <lannur-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 12:44:27 by lannur-s          #+#    #+#             */
-/*   Updated: 2023/12/04 16:15:25 by lannur-s         ###   ########.fr       */
+/*   Updated: 2023/12/06 18:51:56 by lannur-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	validate_map(t_game_data *game_data)
+int	validate_map(t_data *data)
 {
-	if (!check_rectangle(game_data))
+	if (!check_rectangle(data))
 		return (0);
-	if (!check_size(game_data))
+	if (!check_size(data))
 		return (0);
-	if (!check_chars(game_data))
+	if (!check_chars(data))
 		return (0);
-	if (!check_walls(game_data))
+	if (!check_walls(data))
 	{
-		ft_printf("Error\nInvalid walls\n");
+		display_error("Invalid walls");
 		return (0);
 	}
-	game_data->c_count = 0;
-	game_data->e_count = 0;
-	game_data->p_count = 0;
-	e_p_c_count(game_data);
-	if (game_data->c_count < 1 || game_data->e_count != 1 || game_data->p_count != 1)
+	data->c_count = 0;
+	data->e_count = 0;
+	data->p_count = 0;
+	e_p_c_count(data);
+	if (data->c_count < 1 || data->e_count != 1 || data->p_count != 1)
 	{
-		ft_printf("Error\nInvalid exit, start position or collectible count\n");
+		display_error("Invalid exit, start position or collectible count");
 		return (0);
 	}
-	if (!check_valid_path(game_data))
+	if (!check_valid_path(data))
 		return (0);
 	return (1);
 }

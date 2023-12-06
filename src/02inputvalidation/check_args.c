@@ -1,35 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   load_map.c                                         :+:      :+:    :+:   */
+/*   check_args.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lannur-s <lannur-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/29 19:07:20 by lannur-s          #+#    #+#             */
-/*   Updated: 2023/12/04 12:49:22 by lannur-s         ###   ########.fr       */
+/*   Created: 2023/11/30 09:51:40 by lannur-s          #+#    #+#             */
+/*   Updated: 2023/12/06 18:43:52 by lannur-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	load_map(t_game_data *game_data, char *line)
+int	check_args(int ac)
 {
-	t_list	*new;
-	t_list	*last;
-
-	new = (t_list *)malloc(sizeof(t_list));
-	if (!new)
-		return (0);
-	new->content = ft_strdup(line);
-	if (!new->content)
-		return (0);
-	new->next = NULL;
-	if (!game_data->map)
+	if (ac == 1)
 	{
-		game_data->map = new;
-		return (1);
+		display_error("so_long needs a map");
+		return (0);
 	}
-	last = ft_lstlast(game_data->map);
-	last->next = new;
+	if (ac > 2)
+	{
+		display_error("Too many arguments to so_long");
+		return (0);
+	}
 	return (1);
 }

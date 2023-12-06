@@ -6,7 +6,7 @@
 #    By: lannur-s <lannur-s@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/15 13:43:15 by lannur-s          #+#    #+#              #
-#    Updated: 2023/12/05 15:04:09 by lannur-s         ###   ########.fr        #
+#    Updated: 2023/12/06 19:06:14 by lannur-s         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,19 +27,19 @@ LIBFT_DIR = ./include/libft_combined
 
 INCLUDES = -I./include -I$(LIBFT_DIR)/include -I./minilibx-linux
 
-SRCS			=	01src/so_long.c	\
-					02inputvalidation/check_args.c	\
-					02inputvalidation/check_ber.c	\
-					03structureinitialization/load_map.c \
-					03structureinitialization/moves.c \
-					03structureinitialization/read_and_initialize_map.c \
-					03structureinitialization/setup.c \
-					03structureinitialization/win.c \
-					04mapvalidation/validate_map.c \
-					04mapvalidation/path.c \
-					04mapvalidation/map_validation_utility_1.c \
-					utils/error_handling.c \
-					06destroy/destroy.c
+SRCS			=	src/01main/so_long.c	\
+					src/02inputvalidation/check_args.c	\
+					src/02inputvalidation/check_ber.c	\
+					src/03structureinitialization/load_map.c \
+					src/03structureinitialization/read_and_initialize_map.c \
+					src/03structureinitialization/setup.c \
+					src/04mapvalidation/validate_map.c \
+					src/04mapvalidation/path.c \
+					src/04mapvalidation/map_validation_utility.c \
+					src/05moves/cat_movement.c \
+					src/05moves/winning_actions.c \
+					src/06destroy/destroy.c \
+					src/07error/error_handling.c
 					
 OBJS = $(SRCS:%.c=%.o)
 
