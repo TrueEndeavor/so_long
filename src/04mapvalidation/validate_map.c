@@ -6,7 +6,7 @@
 /*   By: lannur-s <lannur-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 12:44:27 by lannur-s          #+#    #+#             */
-/*   Updated: 2023/12/06 18:51:56 by lannur-s         ###   ########.fr       */
+/*   Updated: 2023/12/11 09:35:58 by lannur-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,10 @@ int	validate_map(t_data *data)
 		display_error("Invalid walls");
 		return (0);
 	}
-	data->c_count = 0;
 	data->e_count = 0;
 	data->p_count = 0;
-	e_p_c_count(data);
+	data->c_count = 0;
+	check_e_p_c_count(data);
 	if (data->c_count < 1 || data->e_count != 1 || data->p_count != 1)
 	{
 		display_error("Invalid exit, start position or collectible count");

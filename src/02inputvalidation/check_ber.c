@@ -6,7 +6,7 @@
 /*   By: lannur-s <lannur-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 12:00:50 by lannur-s          #+#    #+#             */
-/*   Updated: 2023/12/06 18:44:00 by lannur-s         ###   ########.fr       */
+/*   Updated: 2023/12/18 09:49:55 by lannur-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	check_ber_extension(char *file_name)
 	int		len;
 
 	len = ft_strlen(file_name);
-	if (file_name[len - 4] != '.' || file_name[len - 3] != 'b'
+	if (file_name[len - 4] != '.' || file_name[len - 3] != 'b'\
 		|| file_name[len - 2] != 'e' || file_name[len - 1] != 'r')
 	{
 		display_error("Invalid file name. \

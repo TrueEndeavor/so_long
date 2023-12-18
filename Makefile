@@ -6,7 +6,7 @@
 #    By: lannur-s <lannur-s@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/15 13:43:15 by lannur-s          #+#    #+#              #
-#    Updated: 2023/12/06 19:06:14 by lannur-s         ###   ########.fr        #
+#    Updated: 2023/12/18 15:09:25 by lannur-s         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,8 +35,10 @@ SRCS			=	src/01main/so_long.c	\
 					src/03structureinitialization/setup.c \
 					src/04mapvalidation/validate_map.c \
 					src/04mapvalidation/path.c \
-					src/04mapvalidation/map_validation_utility.c \
+					src/04mapvalidation/map_checks.c \
+					src/05moves/events.c \
 					src/05moves/cat_movement.c \
+					src/05moves/move_checks.c \
 					src/05moves/winning_actions.c \
 					src/06destroy/destroy.c \
 					src/07error/error_handling.c
@@ -62,8 +64,7 @@ fclean: clean
 	rm -f $(NAME)
 	cd $(LIBFT_DIR) && make fclean
 
-re: fclean
-	${make}
+re: fclean all
 
 test: ${NAME}
 	./${NAME}

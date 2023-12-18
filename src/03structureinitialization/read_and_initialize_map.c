@@ -6,7 +6,7 @@
 /*   By: lannur-s <lannur-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 13:49:07 by lannur-s          #+#    #+#             */
-/*   Updated: 2023/12/06 18:44:24 by lannur-s         ###   ########.fr       */
+/*   Updated: 2023/12/11 13:30:06 by lannur-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,12 @@ void	read_and_initialize_map(t_data *data, char *map)
 
 	fd = check_readable(data, map);
 	line = get_next_line(fd);
-	data->width = (int) ft_strlen(line) - 1;
 	if (!line)
 	{
 		display_error("Cannot read map");
 		on_destroy(data);
 	}
+	data->width = (int) ft_strlen(line) - 1;
 	while (line)
 	{
 		if (!line)

@@ -6,10 +6,9 @@
 /*   By: lannur-s <lannur-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 11:51:43 by lannur-s          #+#    #+#             */
-/*   Updated: 2023/12/06 16:52:34 by lannur-s         ###   ########.fr       */
+/*   Updated: 2023/12/18 15:12:00 by lannur-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "so_long.h"
 
@@ -44,10 +43,10 @@ void	free_maps(t_data *data)
 
 void	destroy_images(t_data *data)
 {
-	if (data->background_ptr)
-		mlx_destroy_image(data->mlx_ptr, data->background_ptr);
-	if (data->mini_background_ptr)
-		mlx_destroy_image(data->mlx_ptr, data->mini_background_ptr);
+	if (data->floor_ptr)
+		mlx_destroy_image(data->mlx_ptr, data->floor_ptr);
+	if (data->paw_ptr)
+		mlx_destroy_image(data->mlx_ptr, data->paw_ptr);
 	if (data->wall_ptr)
 		mlx_destroy_image(data->mlx_ptr, data->wall_ptr);
 	if (data->player_ptr)
@@ -56,19 +55,6 @@ void	destroy_images(t_data *data)
 		mlx_destroy_image(data->mlx_ptr, data->flower_ptr);
 	if (data->lover_ptr)
 		mlx_destroy_image(data->mlx_ptr, data->lover_ptr);
-}
-
-int	on_destroy(t_data *data)
-{
-	destroy_images(data);
-	if (data->mlx_ptr)
-	{
-		if (data->win_ptr)
-			mlx_destroy_window(data->mlx_ptr, data->win_ptr);
-		mlx_destroy_display(data->mlx_ptr);
-		free(data->mlx_ptr);
-	}
-	free_maps(data);
-	(void) *data;
-	exit(0);
+	if (data->fluffy_love_ptr)
+		mlx_destroy_image(data->mlx_ptr, data->fluffy_love_ptr);		
 }

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_validation_utility.c                           :+:      :+:    :+:   */
+/*   map_checks.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lannur-s <lannur-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 18:11:01 by lannur-s          #+#    #+#             */
-/*   Updated: 2023/12/06 18:47:46 by lannur-s         ###   ########.fr       */
+/*   Updated: 2023/12/18 09:50:23 by lannur-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,59 +40,31 @@ int	check_size(t_data *data)
 	return (1);
 }
 
-int	e_p_c_count(t_data *data)
-{
-	t_list	*current;
-	int		x;
-	int		y;
-
-	current = data->map;
-	y = 0;
-	while (current)
-	{
-		x = 0;
-		while (((char *)current->content)[x])
-		{
-			if (((char *)current->content)[x] == 'C')
-				data->c_count++;
-			if (((char *)current->content)[x] == 'E')
-				data->e_count++;
-			if (((char *)current->content)[x] == 'P')
-				data->p_count++;
-			x++;
-		}
-		current = current->next;
-		y++;
-	}
-	return (1);
-}
-
 int	check_chars(t_data *data)
 {
 	t_list	*current;
-	int		x;
-	int		y;
+	int		i;
+	int		j;
+	char	c;
 
+	j = 0;
 	current = data->map;
-	y = 0;
 	while (current)
 	{
-		x = 0;
-		while (((char *)current->content)[x] != '\0' && x < data-> width)
+		i = 0;
+		c = ((char *)current->content)[i];
+		while (c != '\0' && i < data-> width)
 		{
-			if (((char *)current->content)[x] != '0'\
-				&& ((char *)current->content)[x] != '1'\
-				&& ((char *)current->content)[x] != 'C'\
-				&& ((char *)current->content)[x] != 'E'\
-				&& ((char *)current->content)[x] != 'P')
+			c = ((char *)current->content)[i];
+			if (c != '0' && c != '1' && c != 'C' && c != 'E' && c != 'P')
 			{
 				display_error("Invalid char in map");
 				return (0);
 			}
-			x++;
+			i++;
 		}
 		current = current->next;
-		y++;
+		j++;
 	}
 	return (1);
 }
@@ -126,34 +98,29 @@ int	check_walls(t_data *data)
 	return (1);
 }
 
-char	check_next_move(t_data *data, int x, int y)
+int	check_e_p_c_count(t_data *data)
 {
 	t_list	*current;
-	int		i;
+	int		x;
+	int		y;
 
 	current = data->map;
-	i = 0;
-	while (i < y && current)
+	y = 0;
+	while (current)
 	{
+		x = 0;
+		while (((char *)current->content)[x])
+		{
+			if (((char *)current->content)[x] == 'C')
+				data->c_count++;
+			if (((char *)current->content)[x] == 'E')
+				data->e_count++;
+			if (((char *)current->content)[x] == 'P')
+				data->p_count++;
+			x++;
+		}
 		current = current->next;
-		i++;
+		y++;
 	}
-	if (((char *)current->content)[x] == '1')
-		return ('1');
-	if (((char *)current->content)[x] == 'C')
-		return ('C');
-	if (((char *)current->content)[x] == 'E')
-		return ('E');
-	if (((char *)current->content)[x] == '0')
-		return ('0');
-	return ('0');
-}
-
-void	check_collected(t_data *data, int x, int y)
-{
-	if (data->dup_map[y][x] != 'D')
-	{
-		data->dup_map[y][x] = 'D';
-		data->collected++;
-	}
+	return (1);
 }

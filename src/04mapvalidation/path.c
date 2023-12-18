@@ -6,7 +6,7 @@
 /*   By: lannur-s <lannur-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 14:10:26 by lannur-s          #+#    #+#             */
-/*   Updated: 2023/12/06 18:49:30 by lannur-s         ###   ########.fr       */
+/*   Updated: 2023/12/12 09:50:12 by lannur-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,15 +40,20 @@ int	check_flood_fill(t_data *data)
 	return (1);
 }
 
-int	flood_fill(int x, int y, t_data *data)
+int	flood_fill(int x, int y, t_data *data, char target)
 {
 	if (data->dup_map[y][x] == '1' || data->dup_map[y][x] == 'V')
 		return (0);
+	if (data->dup_map[y][x] == target)
+	{
+		data->dup_map[y][x] = '1';
+		return (0);
+	}
 	data->dup_map[y][x] = 'V';
-	if (flood_fill(x, y - 1, data) || flood_fill(x, y + 1, data)
-		|| flood_fill(x - 1, y, data) || flood_fill(x + 1, y, data))
-		return (1);
-	return (0);
+	return ((flood_fill(x, y - 1, data, target) \
+		|| flood_fill(x, y + 1, data, target) \
+		|| flood_fill(x - 1, y, data, target) \
+		|| flood_fill(x + 1, y, data, target)));
 }
 
 int	set_dup_map(t_data *data)
@@ -78,7 +83,7 @@ int	set_dup_map(t_data *data)
 	return (1);
 }
 
-int	check_valid_path(t_data *data)
+int	find_player_position(t_data *data)
 {
 	int	i;
 	int	j;
@@ -100,8 +105,29 @@ int	check_valid_path(t_data *data)
 		}
 		j++;
 	}
-	flood_fill(data->start_x, data->start_y, data);
+	return (0);
+}
+
+int	check_valid_path(t_data *data)
+{
+	int	i;
+	int	j;
+
+	find_player_position(data);
+	flood_fill(data->start_x, data->start_y, data, 'E');
 	j = 0;
+	while (data->dup_map[j])
+	{
+		i = 0;
+		while (data->dup_map[j][i])
+		{
+			if (data->dup_map[j][i] == 'V')
+				data->dup_map[j][i] = '0';
+			i++;
+		}
+		j++;
+	}
+	flood_fill(data->start_x, data->start_y, data, 'C');
 	if (!check_flood_fill(data))
 		return (0);
 	return (1);

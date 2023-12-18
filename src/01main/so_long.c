@@ -6,7 +6,7 @@
 /*   By: lannur-s <lannur-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 12:36:05 by lannur-s          #+#    #+#             */
-/*   Updated: 2023/12/06 18:41:41 by lannur-s         ###   ########.fr       */
+/*   Updated: 2023/12/07 10:59:31 by lannur-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,9 @@
 
 int	main(int ac, char **av)
 {
-	static t_data	data = {0};
+	t_data	data;
 
+	data = (t_data){0};
 	if (!check_args(ac))
 		return (0);
 	if (!check_ber_extension(av[1]))
